@@ -1,0 +1,16 @@
+.imgPreview{
+    width: 30px;
+    height: 30px;
+}
+.img-fluid-show{
+    width: 500px;
+    height: 350px;
+}
+.scanQr {
+    color: #e8e8e8;
+    /* background-color: #f50057; */
+}
+.NFTCoin{
+    width: 80px;
+    height: 80px;
+}

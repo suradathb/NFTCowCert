@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Web3 from "web3";
 import CreateCowCert from "./Components/CreateCowCert";
-// import CowCertificate from "./abis/CowCertificate.json";
 import multer from "multer";
 import axios from "axios";
 import CowCoin from "./abis/CowCoin.json";

@@ -5,7 +5,6 @@ import AddCowCert from "../AddCowCert";
 import Web3 from "web3";
 import CowCoin from "../abis/CowCoin.json";
 import ERC721 from "../abis/ERC721.json";
-import CowCertificate from "../abis/CowCertificate.json";
 import axios from "axios";
 import "./ShowCowCert.css";
 import BlockCowCert from "./BlockCowCert";

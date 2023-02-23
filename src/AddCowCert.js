@@ -6,6 +6,7 @@ import multer from "multer";
 import axios from "axios";
 import CowCoin from "./abis/CowCoin.json";
 import ipfs from './ipfs';
+import ipfsApi from 'ipfs-api';
 import ShowCowCert from "./Components/ShowCowCert";
 
 
@@ -61,13 +62,15 @@ class AddCowCert extends Component {
     };
     this.createTask = this.createTask.bind(this);
     this.toggleCompleted = this.toggleCompleted.bind(this);
+    this.ipfs = ipfsApi('localhost', '5001');
   }
   createTask(content) {
     // console.log(content)
     const CowCoinNo = content.cowcert_no;
     const account = content.account_Employee;
     const objectArray = Object.values(content);
-    ipfs.files.add(content.buffer, (error, result) => {
+    // ipfs.files.add(content.buffer, (error, result) => {
+    this.ipfs.add(content.buffer,(error,result)=>{
       if(error) {
         console.error(error)
         return

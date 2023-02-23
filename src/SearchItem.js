@@ -49,13 +49,14 @@ class SearchItem extends Component {
       const cowerc = new web3.eth.Contract(abiERC, address);
       this.setState({ cowCoin });
       this.setState({ cowerc });
+      const conaddress = cowCoin._address;
       const coinCow = await cowCoin.methods.cowCertCount().call();
       this.setState({ coinCow });
 
       axios
         .get(
           // `https://api-testnet.bscscan.com/api?module=account&action=tokennfttx&contractaddress=0x82eaDcf8504F893993cf075b98f11465078B240E&address=${accounts}`
-          `https://api-testnet.bscscan.com/api?module=account&action=tokennfttx&contractaddress=0x73DF02B5a8AB94932343d7259d5002b329050659&address=${accounts}`
+          `https://api-testnet.bscscan.com/api?module=account&action=tokennfttx&contractaddress=${conaddress}&address=${accounts}`
         )
         .then((response) => {
           const getDataAll = response.data.result.map((cow, key) => {

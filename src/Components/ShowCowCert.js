@@ -5,7 +5,6 @@ import AddCowCert from "../AddCowCert";
 import Web3 from "web3";
 import CowCoin from "../abis/CowCoin.json";
 import ERC721 from "../abis/ERC721.json";
-import CowCertificate from "../abis/CowCertificate.json";
 import axios from "axios";
 import "./ShowCowCert.css";
 import BlockCowCert from "./BlockCowCert";
@@ -45,7 +44,7 @@ class ShowCowCert extends Component {
       this.setState({ cowerc });
       const coinCow = await cowCoin.methods.cowCertCount().call();
       this.setState({ coinCow });
-
+      const conaddress = cowCoin._address;
       for (var i = 1; i <= coinCow; i++) {
         const task = await cowCoin.methods.blacklistedCowCert(i).call();
         const shwaddress = await cowerc.methods.ownerOf(i).call();
@@ -61,7 +60,8 @@ class ShowCowCert extends Component {
       axios
         .get(
           // "https://api-testnet.bscscan.com/api?module=account&action=txlist&address=0x82eaDcf8504F893993cf075b98f11465078B240E&startblock=1&endblock=99999999&sort=asc&apikey=YourApiKeyToken"
-          "https://api-testnet.bscscan.com/api?module=account&action=tokennfttx&contractaddress=0x73DF02B5a8AB94932343d7259d5002b329050659"
+          // "https://api-testnet.bscscan.com/api?module=account&action=tokennfttx&contractaddress=0x73DF02B5a8AB94932343d7259d5002b329050659"
+          `https://api-testnet.polygonscan.com/api?module=account&action=tokennfttx&contractaddress=${conaddress}&sort=asc`
         )
         .then((response) => {
           // this.setState({

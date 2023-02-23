@@ -52,6 +52,8 @@ class Search extends Component {
       const cowerc = new web3.eth.Contract(abiERC, address);
       this.setState({ cowCoin });
       this.setState({ cowerc });
+      const conaddress = cowCoin._address;
+      this.setState({contractaddress:conaddress});
       const coinCow = await cowCoin.methods.cowCertCount().call();
       this.setState({ coinCow });
       for (var i = 1; i <= coinCow; i++) {
@@ -64,7 +66,8 @@ class Search extends Component {
       }
     } else {
       const publicweb3 = new Web3(
-        Web3.givenProvider || "https://data-seed-prebsc-1-s1.binance.org:8545/"
+        // Web3.givenProvider || "https://data-seed-prebsc-1-s1.binance.org:8545/"
+        Web3.givenProvider || "https://rpc-mumbai.maticvigil.com"
       );
 
       this.setState({ account: "0xCb6b82C5c03C7A5F356F5aA26DE20c14980c754C" });
@@ -77,6 +80,8 @@ class Search extends Component {
       const cowerc = new publicweb3.eth.Contract(abiERC, address);
       this.setState({ cowCoin });
       this.setState({ cowerc });
+      const conaddress = cowCoin._address;
+      this.setState({contractaddress:conaddress});
       const coinCow = await cowCoin.methods.cowCertCount().call();
       this.setState({ coinCow });
       // console.log(cowerc)
@@ -96,7 +101,8 @@ class Search extends Component {
     axios
       .get(
         // "https://api-testnet.bscscan.com/api?module=account&action=txlist&address=0x82eaDcf8504F893993cf075b98f11465078B240E&startblock=1&endblock=99999999&sort=asc&apikey=YourApiKeyToken"
-        "https://api-testnet.bscscan.com/api?module=account&action=tokennfttx&contractaddress=0x73DF02B5a8AB94932343d7259d5002b329050659"
+        // "https://api-testnet.bscscan.com/api?module=account&action=tokennfttx&contractaddress=0x73DF02B5a8AB94932343d7259d5002b329050659"
+        `https://api-testnet.polygonscan.com/api?module=account&action=tokennfttx&contractaddress=${this.state.contractaddress}&sort=asc`
       )
       .then((response) => {
         const getDataAll = response.data.result.map((cow, key) => {
@@ -178,6 +184,7 @@ class Search extends Component {
     super(props);
     this.state = {
       account: "",
+      contractaddress:"",
       cowCoin: [],
       coinCow: 0,
       cowerc: [],

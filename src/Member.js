@@ -50,7 +50,9 @@ class Member extends Component {
       this.setState({ cowerc });
       const coinCow = await cowCoin.methods.cowCertCount().call();
       this.setState({ coinCow });
-      // console.log(cowCoin.methods.blacklistedCowCert(1).call())
+      const conaddress = cowCoin._address;
+      this.setState({contractaddress:conaddress});
+      // console.log(cowCoin._address)
       for (var i = 1; i <= coinCow; i++) {
         const task = await cowCoin.methods.blacklistedCowCert(i).call();
         const getadd = await cowerc.methods.ownerOf(i).call();
@@ -66,7 +68,8 @@ class Member extends Component {
       axios
         .get(
           // `https://api-testnet.bscscan.com/api?module=account&action=tokennfttx&contractaddress=0x82eaDcf8504F893993cf075b98f11465078B240E&address=${accounts}`
-          `https://api-testnet.bscscan.com/api?module=account&action=tokennfttx&contractaddress=0x73DF02B5a8AB94932343d7259d5002b329050659&address=${accounts}`
+          // `https://api-testnet.bscscan.com/api?module=account&action=tokennfttx&contractaddress=0x73DF02B5a8AB94932343d7259d5002b329050659&address=${accounts}`
+          `https://api-testnet.polygonscan.com/api?module=account&action=tokennfttx&contractaddress=${conaddress}&address=${accounts}`
         )
         .then((response) => {
           const getDataAll = response.data.result.map((cow, key) => {
@@ -119,6 +122,7 @@ class Member extends Component {
     super(props);
     this.state = {
       account: "",
+      contractaddress:"",
       cowCoin: [],
       coinCow: 0,
       cowerc: [],
